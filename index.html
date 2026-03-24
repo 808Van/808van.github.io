@@ -170,24 +170,47 @@
         <button onclick="startGame()" style="margin-top:10px; padding:10px; width:100%; background:var(--tceq-blue); border:none; color:white; font-family:'Orbitron';">START SYSTEM SCAN</button>
     </div>
 
-    <div id="bio" class="section">
-        <h3>Intelligence Report</h3>
-        <p>Codename: Van | Origin: Waxahachie, TX</p>
-        <p>Van is an Architect in the digital realm. He loves fidget toys, drawing, and music like "Astronaut in the Ocean."</p>
+<div id="photos" class="section">
+        <div class="card"> <h3>Photo Archive</h3>
+            <div class="gallery">
+                <img src="unnamed.jpg" alt="Van Primary" onclick="expandImage(this)">
+                
+                <img src="3202026Vanicecreamv2.JPG" alt="Van Eating Ice Cream and Lake Line Mall" onclick="expandImage(this)">
+                
+                <img src="VanSchoolphoto2ndGrade.jpg" alt="Gallery 3" onclick="expandImage(this)">
+            </div>
+        </div>
     </div>
 
-    <div id="photos" class="section">
-        <h3>Photo Archive</h3>
-        <div class="gallery">
-            <img src="unnamed.jpg" onclick="expandImage(this)">
-            <img src="3202026Vanicecreamv2.JPG" onclick="expandImage(this)">
-            <img src="VanSchoolphoto2ndGrade.jpg" onclick="expandImage(this)">
+<div id="bio" class="section">
+        <div class="card"> <h3>Intelligence Report</h3>
+            <div class="bio-text">
+                <p><strong>Codename:</strong> Van</p>
+                <p><strong>Deployment:</strong> 08/31/2018</p>
+                <p><strong>Origin:</strong> Waxahachie, TX</p>
+                <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
+                <p>Van is an Architect in the digital 🔢 realm. Known for learning and exploring Minecraft engineering and strategic Roblox maneuvers, he loves to learn and make friends.
+                    <br><br>
+                    In the Earthly 🌍 realm, Van loves to listen to music like the Avett Brothers' "Heart Like a Kick Drum" and "Astronaut in the Ocean." 
+                    He loves fidget toys of any kind, drawing, and creating things with pins, erasers, and paperclips.</p>
+            </div>
         </div>
     </div>
 
     <div id="events" class="section">
-        <h3>Deployment Schedule</h3>
-        <div class="event-item"><h4>7th Birthday Mission</h4><p>Status: [completed]</p></div>
+        <div class="card"> <h3>Deployment Schedule</h3>
+            <div class="event-item">
+                <h4>7th Birthday Mission</h4>
+                <p><strong>Date:</strong> 08/31/2025</p>
+                <p><strong>Location:</strong> WC Park</p>
+                <p style="color: var(--minecraft-green);">[completed]</p>
+            </div>
+            <div class="event-item" style="border-left-color: var(--neon-blue);">
+                <h4>Level 8 Upgrade Party</h4>
+                <p><strong>Date:</strong> 08/TBD/2026</p>
+                <p>Status: Loading...</p>
+            </div>
+        </div>
     </div>
 
     <div id="imgModal" class="modal" onclick="this.style.display='none'"><img class="modal-content" id="expandedImg"></div>

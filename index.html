@@ -42,16 +42,17 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            flex-wrap: wrap;
         }
 
         .tab-btn {
-            padding: 15px 20px;
+            padding: 15px 12px;
             color: #888;
             cursor: pointer;
             border: none;
             background: none;
             font-family: 'Orbitron', sans-serif;
-            font-size: 12px;
+            font-size: 11px;
             transition: 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -63,7 +64,6 @@
             text-shadow: 0 0 10px var(--neon-blue);
         }
 
-        /* Content Sections */
         .section { display: none; width: 90%; max-width: 500px; padding: 20px; animation: fadeIn 0.5s; }
         .section.active { display: block; }
 
@@ -81,109 +81,62 @@
         }
 
         .profile-pic { 
-            width: 160px; 
-            height: 160px; 
-            border-radius: 50%; 
-            border: 4px solid var(--polo-red); 
-            object-fit: cover;
-            margin-bottom: 15px;
+            width: 160px; height: 160px; 
+            border-radius: 50%; border: 4px solid var(--polo-red); 
+            object-fit: cover; margin-bottom: 15px;
             box-shadow: 0 0 15px rgba(204, 0, 0, 0.3);
             cursor: pointer;
         }
 
-        .status-dot {
-            height: 12px;
-            width: 12px;
-            background-color: var(--minecraft-green);
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
-            box-shadow: 0 0 8px var(--minecraft-green);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
-        }
-
         .id-box {
-            margin-top: 20px;
-            text-align: left;
+            margin-top: 20px; text-align: left;
             background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 12px;
+            padding: 15px; border-radius: 12px;
             font-family: 'Roboto Mono', monospace;
             border: 1px solid #333;
         }
 
-        .id-box p { margin: 8px 0; font-size: 14px; }
-
-        /* Photo Gallery */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .gallery img { 
-            width: 100%; 
-            height: 150px;
-            border-radius: 12px; 
-            border: 1px solid #333; 
-            object-fit: cover;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .gallery img:hover { transform: scale(1.05); border-color: var(--neon-blue); }
-
-        /* MODAL STYLES (The Pop-up) */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            padding-top: 60px;
-            left: 0;
-            top: 0;
+        /* GAME STYLES */
+        #game-canvas {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            cursor: zoom-out;
-        }
-
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            border-radius: 10px;
+            height: 300px;
+            background: #000;
             border: 2px solid var(--neon-blue);
-            animation: zoom 0.3s;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+        .glitch {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--polo-red);
+            box-shadow: 0 0 15px var(--polo-red);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
         }
 
-        @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
-
-        /* Events Timeline */
-        .event-item {
-            border-left: 3px solid var(--polo-red);
-            padding: 15px;
-            margin-bottom: 20px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 0 12px 12px 0;
-        }
-        h3 { font-family: 'Orbitron', sans-serif; color: var(--neon-blue); border-bottom: 1px solid #333; padding-bottom: 8px; }
-        .bio-text { line-height: 1.6; color: #ccc; }
+        /* Modal / Gallery Styles */
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px; }
+        .gallery img { width: 100%; height: 150px; border-radius: 12px; border: 1px solid #333; object-fit: cover; cursor: pointer; }
+        .modal { display: none; position: fixed; z-index: 1000; padding-top: 60px; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); }
+        .modal-content { margin: auto; display: block; width: 80%; max-width: 700px; border-radius: 10px; border: 2px solid var(--neon-blue); }
 
     </style>
 </head>
 <body>
 
     <nav>
-        <button class="tab-btn active" onclick="openTab('card', event)">Gamer Card</button>
+        <button class="tab-btn active" onclick="openTab('card', event)">Card</button>
         <button class="tab-btn" onclick="openTab('bio', event)">Bio</button>
         <button class="tab-btn" onclick="openTab('photos', event)">Photos</button>
         <button class="tab-btn" onclick="openTab('events', event)">Events</button>
+        <button class="tab-btn" onclick="openTab('games', event)">Games</button>
     </nav>
 
     <div id="card" class="section active">
@@ -191,104 +144,16 @@
             <img src="unnamed.jpg" class="profile-pic" alt="Van" onclick="expandImage(this)">
             <h2 style="font-family: 'Orbitron', sans-serif; letter-spacing: 2px;">VAN aKa VanTheMan808</h2>
             <p style="color: var(--neon-blue); font-weight: bold; font-size: 14px;">RANK: GOLD ARCHITECT</p>
-            
             <div style="background:#222; height:12px; border-radius:6px; margin:15px 0; border: 1px solid #444;">
-                <div style="background: linear-gradient(90deg, #55ff55, var(--neon-blue)); width:67%; height:100%; border-radius:6px;"></div>
+                <div style="background: linear-gradient(90deg, #55ff55, var(--neon-blue)); width:67%; height:100%; border-radius:67%;"></div>
             </div>
-            
-            <p style="font-size: 12px; color: #888;"><span class="status-dot"></span> Minecraft Server: Online</p>
-
             <div class="id-box">
                 <p>🎮 <strong>Roblox:</strong> BUILDING...</p>
-              <p style="display: flex; align-items: center; gap: 8px; color: var(--minecraft-green);">
-    <img src="Homepage_Download-Launcher_Creeper-Logo_500x500.avif" alt="Minecraft" style="width: 20px; height: 20px; border-radius: 3px;">
-    <strong>Minecraft:</strong> 
-    <span style="font-family: 'Roboto Mono', monospace; font-size: 16px; font-weight: bold;">VANtheMAN808 ⛏️</span>
-</p>
+                <p style="display: flex; align-items: center; gap: 8px; color: var(--minecraft-green);">
+                    <img src="Homepage_Download-Launcher_Creeper-Logo_500x500.avif" alt="MC" style="width: 20px; height: 20px;">
+                    <strong>Minecraft:</strong> <span style="font-size: 16px;">VANtheMAN808 ⛏️</span>
+                </p>
                 <p>💻 <strong>OS:</strong> Windows</p>
-               <p style="display: flex; align-items: center; gap: 8px;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#FF0000" viewBox="0 0 16 16" style="vertical-align: middle;">
-        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.122C.001 7.37.01 6.458.082 5.508l.008-.104.01-.105c.05-.572.124-1.14.235-1.558A2.007 2.007 0 0 1 1.75 2.332c1.123-.302 5.537-.332 6.151-.334zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
-    </svg>
-    <strong>YouTube:</strong> 
-    <a href="https://www.youtube.com/playlist?list=PLJ2EF3tuy8qdP633N_X13bTwxbCmhyP52" style="color: var(--neon-blue); text-decoration: none; font-weight: bold;">Van's Videos</a>
-</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="bio" class="section">        <h3>Intelligence Report</h3>
-        <div class="bio-text">
-            <p><strong>Codename:</strong> Van</p>
-            <p><strong>Deployment:</strong> 08/31/2018</p>
-            <p><strong>Origin:</strong> Waxahachie, TX</p>
-            <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
-            <p>Van is an Architect in the digital 🔢 realm. Known for learning and exploring Minecraft engineering and strategic Roblox maneuvers, he loves to learn and make freinds.
-                <br>
-                In the Earthly 🌍 realm Van loves to listen to music like the Avett Brothers "Heart like a kick drum" and other songs like "Astronaught in the Ocean". 
-                He loves fidget toys of any kind, drawing, creating things with pins and erasers and paperclips.</p>
-        </div>
-    </div>
-
-    <div id="photos" class="section">
-        <h3>Photo Archive</h3>
-        <div class="gallery">
-            <img src="unnamed.jpg" alt="Van Primary" onclick="expandImage(this)">
-            
-            <img src="3202026Vanicecreamv2.JPG" alt="Van Eating Ice Cream and Lake Line Mall" onclick="expandImage(this)">
-            
-            <img src="VanSchoolphoto2ndGrade.jpg" alt="Gallery 3" onclick="expandImage(this)">
-        </div>
-    
-    </div>
-
-    <div id="events" class="section">
-        <h3>Deployment Schedule</h3>
-        <div class="event-item">
-            <h4>7th Birthday Mission</h4>
-            <p><strong>Date:</strong> 08/31/2025</p>
-            <p><strong>Location:</strong> WC Park</p>
-            <p style="color: var(--minecraft-green);">[completed]</p>
-        </div>
-        <div class="event-item" style="border-left-color: var(--neon-blue);">
-            <h4>Level 8 Upgrade Party</h4>
-            <p><strong>Date:</strong> 08/TBD/2026</p>
-            <p>Status: Loading...</p>
-        </div>
-    </div>
-
-    <div id="imgModal" class="modal" onclick="this.style.display='none'">
-        <img class="modal-content" id="expandedImg">
-    </div>
-
-    <script>
-        function openTab(tabId, event) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(s => s.classList.remove('active'));
-            
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            if (event) event.currentTarget.classList.add('active');
-        }
-
-        // Function to handle opening the image in the modal
-        function expandImage(imgElement) {
-            const modal = document.getElementById("imgModal");
-            const expandedImg = document.getElementById("expandedImg");
-            modal.style.display = "block";
-            expandedImg.src = imgElement.src;
-        }
-
-        window.onload = function() {
-            openTab('card');
-        };
-    </script>
-    <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>
-</body>
-</html>
+                <p style="display: flex; align-items: center; gap: 8px;">
+                    <svg width="20" height="20" fill="#FF0000" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.122C.001 7.37.01 6.458.082 5.508l.008-.104.01-.105c.05-.572.124-1.14.235-1.558A2.007 2.007 0 0 1 1.75 2.332c1.123-.302 5.537-.332 6.151-.334zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/></svg>
+                    <a href="https://www.youtube.com/playlist?list=PLJ2EF3tuy8qdP633N_X13bTwxbCmhyP52" style="color: var(--

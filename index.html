@@ -206,7 +206,9 @@
         }
 
         // GAME LOGIC
-        let score = 0;
+       let score = 0;
+        let gameTimer; // This will handle the automatic movement
+
         function startGame() {
             score = 0;
             document.getElementById('score').innerText = score;
@@ -215,24 +217,42 @@
 
         function spawnGlitch() {
             const canvas = document.getElementById('game-canvas');
-            canvas.innerHTML = '';
+            canvas.innerHTML = ''; // Clear previous glitch
+            
+            // Stop any existing timer so they don't stack up
+            clearTimeout(gameTimer);
+
             const glitch = document.createElement('div');
             glitch.className = 'glitch';
             glitch.innerText = 'ERR';
-            glitch.style.left = Math.random() * (canvas.clientWidth - 40) + 'px';
-            glitch.style.top = Math.random() * (canvas.clientHeight - 40) + 'px';
+            
+            // Randomly position the glitch
+            const maxX = canvas.clientWidth - 45;
+            const maxY = canvas.clientHeight - 45;
+            glitch.style.left = Math.random() * maxX + 'px';
+            glitch.style.top = Math.random() * maxY + 'px';
+
+            // Catch the glitch (Success)
             glitch.onclick = (e) => {
                 e.stopPropagation();
                 score++;
                 document.getElementById('score').innerText = score;
-                spawnGlitch();
+                spawnGlitch(); // Immediately jump to a new spot
             };
+
             canvas.appendChild(glitch);
+
+            // AUTO-MOVE: If not clicked in 1000ms (1 second), move it!
+            gameTimer = setTimeout(() => {
+                spawnGlitch();
+            }, 1000);
         }
 
         function missClick() {
-            if(score > 0) score--;
-            document.getElementById('score').innerText = score;
+            if(score > 0) {
+                score--;
+                document.getElementById('score').innerText = score;
+            }
         }
 
         window.onload = () => openTab('card');

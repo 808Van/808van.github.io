@@ -145,4 +145,166 @@
         }
         .modal-content {
             margin: auto; display: block; width: 85%;
-            max-width:
+            max-width: 700px; border-radius: 10px;
+            border: 2px solid var(--neon-blue);
+            animation: zoom 0.3s;
+        }
+        @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
+
+        /* Events Timeline */
+        .event-item {
+            border-left: 3px solid var(--polo-red);
+            padding: 15px; margin-bottom: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 0 12px 12px 0;
+            text-align: left;
+        }
+        h3 { font-family: 'Orbitron', sans-serif; color: var(--neon-blue); border-bottom: 1px solid #333; padding-bottom: 8px; margin-top: 0; }
+        .bio-text { line-height: 1.6; color: #ccc; text-align: left; }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button class="tab-btn active" onclick="openTab('card', event)">Card</button>
+        <button class="tab-btn" onclick="openTab('bio', event)">Bio</button>
+        <button class="tab-btn" onclick="openTab('photos', event)">Photos</button>
+        <button class="tab-btn" onclick="openTab('events', event)">Events</button>
+        <button class="tab-btn" onclick="openTab('games', event)">Games</button>
+    </nav>
+
+    <div id="card" class="section active">
+        <div class="card">
+            <img src="unnamed.jpg" class="profile-pic" alt="Van" onclick="expandImage(this)">
+            <h2 style="font-family: 'Orbitron', sans-serif; letter-spacing: 2px; margin: 5px 0;">VAN aKa VanTheMan808</h2>
+            <p style="color: var(--neon-blue); font-weight: bold; font-size: 14px; margin: 0;">RANK: GOLD ARCHITECT</p>
+            
+            <div style="background:#222; height:12px; border-radius:6px; margin:15px 0; border: 1px solid #444;">
+                <div style="background: linear-gradient(90deg, #55ff55, var(--neon-blue)); width:67%; height:100%; border-radius:6px;"></div>
+            </div>
+            
+            <div class="id-box">
+                <p>🎮 <strong>Roblox:</strong> BUILDING...</p>
+                <p style="display: flex; align-items: center; gap: 8px; color: var(--minecraft-green);">
+                    <img src="Homepage_Download-Launcher_Creeper-Logo_500x500.avif" alt="MC" style="width: 20px; height: 20px;">
+                    <strong>Minecraft:</strong> <span style="font-size: 16px; font-weight: bold;">VANtheMAN808 ⛏️</span>
+                </p>
+                <p>💻 <strong>OS:</strong> Windows</p>
+                <p style="display: flex; align-items: center; gap: 8px;">
+                    <svg width="20" height="20" fill="#FF0000" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.122C.001 7.37.01 6.458.082 5.508l.008-.104.01-.105c.05-.572.124-1.14.235-1.558A2.007 2.007 0 0 1 1.75 2.332c1.123-.302 5.537-.332 6.151-.334zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/></svg>
+                    <a href="https://www.youtube.com/playlist?list=PLJ2EF3tuy8qdP633N_X13bTwxbCmhyP52" style="color: var(--neon-blue); text-decoration: none; font-weight: bold;">Van's Videos</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="bio" class="section">
+        <div class="card">
+            <h3>Intelligence Report</h3>
+            <div class="bio-text">
+                <p><strong>Codename:</strong> Van</p>
+                <p><strong>Deployment:</strong> 08/31/2018</p>
+                <p><strong>Origin:</strong> Waxahachie, TX</p>
+                <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
+                <p>Van is an Architect in the digital realm. Known for learning and exploring Minecraft engineering and strategic Roblox maneuvers, he loves to learn and make friends.</p>
+                <p>In the Earthly realm, Van loves to listen to music like the Avett Brothers' "Heart Like a Kick Drum" and "Astronaut in the Ocean." He loves fidget toys, drawing, and creating things with pins, erasers, and paperclips.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="photos" class="section">
+        <div class="card">
+            <h3>Photo Archive</h3>
+            <div class="gallery">
+                <img src="unnamed.jpg" alt="Van Primary" onclick="expandImage(this)">
+                <img src="3202026Vanicecreamv2.JPG" alt="Van Ice Cream" onclick="expandImage(this)">
+                <img src="VanSchoolphoto2ndGrade.jpg" alt="School Photo" onclick="expandImage(this)">
+            </div>
+        </div>
+    </div>
+
+    <div id="events" class="section">
+        <div class="card">
+            <h3>Deployment Schedule</h3>
+            <div class="event-item">
+                <h4>7th Birthday Mission</h4>
+                <p><strong>Date:</strong> 08/31/2025</p>
+                <p><strong>Location:</strong> WC Park</p>
+                <p style="color: var(--minecraft-green);">[COMPLETED]</p>
+            </div>
+            <div class="event-item" style="border-left-color: var(--neon-blue);">
+                <h4>Level 8 Upgrade Party</h4>
+                <p><strong>Date:</strong> 08/TBD/2026</p>
+                <p>Status: Loading...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="games" class="section">
+        <div class="card">
+            <h3>Catch the Glitch</h3>
+            <p>Score: <span id="score" style="color:var(--neon-blue); font-weight:bold;">0</span></p>
+            <div id="game-canvas" onclick="missClick()"></div>
+            <button onclick="startGame()" style="margin-top:15px; padding:12px; width:100%; background:var(--tceq-blue); border:none; color:white; font-family:'Orbitron'; cursor:pointer; border-radius:8px;">START SYSTEM SCAN</button>
+        </div>
+    </div>
+
+    <div id="imgModal" class="modal" onclick="this.style.display='none'"><img class="modal-content" id="expandedImg"></div>
+
+    <script>
+        function openTab(tabId, event) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (event) event.currentTarget.classList.add('active');
+        }
+
+        function expandImage(img) {
+            document.getElementById("imgModal").style.display = "block";
+            document.getElementById("expandedImg").src = img.src;
+        }
+
+        // GAME LOGIC
+        let score = 0;
+        let gameTimer;
+        function startGame() {
+            score = 0;
+            document.getElementById('score').innerText = score;
+            spawnGlitch();
+        }
+
+        function spawnGlitch() {
+            const canvas = document.getElementById('game-canvas');
+            canvas.innerHTML = '';
+            clearTimeout(gameTimer);
+
+            const glitch = document.createElement('div');
+            glitch.className = 'glitch';
+            glitch.innerText = 'ERR';
+            glitch.style.left = Math.random() * (canvas.clientWidth - 50) + 'px';
+            glitch.style.top = Math.random() * (canvas.clientHeight - 50) + 'px';
+
+            glitch.onclick = (e) => {
+                e.stopPropagation();
+                score++;
+                document.getElementById('score').innerText = score;
+                spawnGlitch();
+            };
+
+            canvas.appendChild(glitch);
+            gameTimer = setTimeout(spawnGlitch, 1000);
+        }
+
+        function missClick() {
+            if(score > 0) { score--; document.getElementById('score').innerText = score; }
+        }
+
+        window.onload = () => openTab('card');
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
